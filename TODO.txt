@@ -1,0 +1,18 @@
+Vanila JS TODO List 
+
+1. 화면 만들기
+    컨텐츠는 모두 가운데 정렬 - o
+    1-1. 날씨
+    1-2. 시간 (00:00:00)		- o
+    1-3. 랜덤 문구 [이름]!	- o
+        - Hello [이름]!
+        - Good day [이름]!
+        - Hey there [이름]!
+        - How are things [이름]?
+        - What's happening [이름]?
+        - Yo [이름]~
+        - What's the story [이름]?
+    1-4. 할 일 입력			- o
+    1-5. 할일 띄우기			- o
+        - 삭제버튼
+		
