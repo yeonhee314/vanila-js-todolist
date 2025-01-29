@@ -6,6 +6,8 @@ let task_array = [];
 
 const HIDDEN_CLASSNAME = "hidden";
 const USER_NAME = "userName"
+const TASKS = "tasks";
+
 const greeting_arr = [
     "Hello",
     "Good day",
@@ -21,8 +23,8 @@ const greeting_arr = [
 if(localStorage.getItem(USER_NAME)){
     setClock();
     setUserName(localStorage.getItem(USER_NAME));
-    const savedTasks = localStorage.getItem('tasks');   // 저장되어있는 할 일 목록
-    console.log(`savedTasks : ${savedTasks}`);
+    const savedTasks = localStorage.getItem(TASKS);   // 저장되어있는 할 일 목록
+    // console.log(`savedTasks : ${savedTasks}`);
     if(savedTasks){
         task_array = JSON.parse(savedTasks);    // JSON.parse() : JSON을 객체로 변경한다. 
         displayTasks(task_array);
@@ -65,17 +67,33 @@ function randomGreeting(){
 function onTodoSubmit(){
     let task = document.querySelector('#input-task').value;
     task_array.push(task);
-    localStorage.setItem('tasks', JSON.stringify(task_array));
+    localStorage.setItem(TASKS, JSON.stringify(task_array));
     displayTasks(task_array);
 }
 
 // 할 일 목록을 화면에 출력한다.
 function displayTasks(task_array){
-    // 
     let taskList = document.querySelector('#task-list');
+    taskList.innerHTML = '';    // 기존 목록 비우기
     for(let i = 0; i < task_array.length; i++){
         let li = document.createElement('li');
-        li.innerHTML = task_array[i];
+        let delBtn = document.createElement('button');
+        li.setAttribute('data-index', i);
+        delBtn.innerHTML = '❌';
+        delBtn.setAttribute('class', 'delBtn');
+        delBtn.setAttribute('type', 'button');
+        li.innerHTML = `<span>${task_array[i]}</span>`;
+        li.appendChild(delBtn);
         taskList.append(li);
+
+        // 삭제버튼 눌렀을 때
+        delBtn.addEventListener('click', function(){
+            // console.log(`클릭한 항목의 인덱스 : ${li.getAttribute('data-index')}`);
+            let index = li.getAttribute('data-index');
+            let tasks = JSON.parse(localStorage.getItem(TASKS));
+            tasks.splice(index, 1);
+            localStorage.setItem(TASKS, JSON.stringify(tasks));
+            taskList.removeChild(li);
+        });
     }
 }

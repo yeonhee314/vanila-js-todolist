@@ -53,11 +53,19 @@ input:focus{
     font-size: 20px;
     width: 100%;
 }
-#task-list{
-    width: 100%;
-}
 #task-list > li{
     padding: 20px;
     text-align: left;
     font-size: 20px;
+    display: flex;
+    justify-content : space-between;
+    height: 30px;
+}
+.delBtn{
+    all: unset;
+    transition: all 0.3s;
+    transform-origin: center;
+}
+.delBtn:hover{
+    transform: scale(1.2);
 }
